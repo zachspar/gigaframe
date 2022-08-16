@@ -6,22 +6,31 @@
 #define GIGAFRAME_GIGAFRAME_H
 
 #include "giga_series.h"
+#include "types.h"
 
 class GigaFrame {
 public:
-    virtual unsigned long get_rows() = 0;
-    virtual unsigned long get_cols() = 0;
-    virtual unsigned long long get_bytes() = 0;
+    virtual IndexType get_rows() = 0;
+    virtual IndexType get_cols() = 0;
+    virtual SizeType get_bytes() = 0;
+
+    template<class T>
+    virtual T get_obj(IndexType row, IndexType col) = 0;
+
+    virtual GigaSeries get_col_series(IndexType col) = 0;
+    virtual GigaSeries get_row_series(IndexType row) = 0;
+
+    void add_giga_index(std::shared_ptr<GigaIndex> giga_index_ptr);
 };
 
 class StaticGigaFrame : public GigaFrame {
 private:
     GigaSeries* giga_series_array;
-    unsigned long long bytes_size;
-    unsigned long num_cols;
-    unsigned long num_cols;
+    SizeType bytes_size;
+    IndexType num_cols;
+    IndexType num_rows;
 public:
-    StaticGigaFrame(GigaSeries* giga_series_array, unsigned long num_cols, unsigned long num_rows);
+    StaticGigaFrame(GigaSeries* giga_series_array, IndexType num_cols, IndexType num_rows);
 };
 
 #endif //GIGAFRAME_GIGAFRAME_H

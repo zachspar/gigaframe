@@ -1,2 +1,2 @@
 # gigaframe
-Giga-pandas
+A dataframe designed for gigabyte sized problems.
