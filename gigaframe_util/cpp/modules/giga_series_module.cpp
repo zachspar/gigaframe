@@ -33,6 +33,7 @@ static struct PyModuleDef giga_index_module = {
 // Python GigaSeries class
 static int PyGigaSeries_init(PyGigaSeries *self, PyObject *args, PyObject *kwargs) {
     self->gs_obj = new StaticGigaSeries();
+    return 0;
 }
 
 static void PyGigaSeries_dealloc(PyGigaSeries *self) {
